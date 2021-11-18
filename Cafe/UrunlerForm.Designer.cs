@@ -41,6 +41,9 @@ namespace Cafe
             // 
             // dgvUrunler
             // 
+            this.dgvUrunler.AllowUserToAddRows = false;
+            this.dgvUrunler.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvUrunler.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvUrunler.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUrunler.Location = new System.Drawing.Point(12, 74);
             this.dgvUrunler.Name = "dgvUrunler";
@@ -75,6 +78,7 @@ namespace Cafe
             this.btnEkle.TabIndex = 4;
             this.btnEkle.Text = "EKLE";
             this.btnEkle.UseVisualStyleBackColor = true;
+            this.btnEkle.Click += new System.EventHandler(this.btnEkle_Click);
             // 
             // label1
             // 

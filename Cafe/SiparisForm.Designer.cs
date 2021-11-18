@@ -29,6 +29,8 @@ namespace Cafe
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblOdemeTutari = new System.Windows.Forms.Label();
             this.btnEkle = new System.Windows.Forms.Button();
             this.lblMasaNo = new System.Windows.Forms.Label();
@@ -44,6 +46,10 @@ namespace Cafe
             this.nudAdet = new System.Windows.Forms.NumericUpDown();
             this.cboUrun = new System.Windows.Forms.ComboBox();
             this.dgvSiparisDetaylar = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.nudAdet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSiparisDetaylar)).BeginInit();
             this.SuspendLayout();
@@ -63,13 +69,14 @@ namespace Cafe
             // btnEkle
             // 
             this.btnEkle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnEkle.Location = new System.Drawing.Point(232, 38);
+            this.btnEkle.Location = new System.Drawing.Point(341, 37);
             this.btnEkle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnEkle.Name = "btnEkle";
             this.btnEkle.Size = new System.Drawing.Size(77, 30);
             this.btnEkle.TabIndex = 34;
             this.btnEkle.Text = "EKLE";
             this.btnEkle.UseVisualStyleBackColor = true;
+            this.btnEkle.Click += new System.EventHandler(this.btnEkle_Click);
             // 
             // lblMasaNo
             // 
@@ -110,6 +117,7 @@ namespace Cafe
             this.btnAnasayfayaDon.TabIndex = 44;
             this.btnAnasayfayaDon.Text = "ANASAYFAYA DÖN";
             this.btnAnasayfayaDon.UseVisualStyleBackColor = false;
+            this.btnAnasayfayaDon.Click += new System.EventHandler(this.btnAnasayfayaDon_Click);
             // 
             // btnOdemeAl
             // 
@@ -124,6 +132,7 @@ namespace Cafe
             this.btnOdemeAl.TabIndex = 43;
             this.btnOdemeAl.Text = "ÖDEME AL";
             this.btnOdemeAl.UseVisualStyleBackColor = false;
+            this.btnOdemeAl.Click += new System.EventHandler(this.btnOdemeAl_Click);
             // 
             // btnSiparisIptal
             // 
@@ -138,6 +147,7 @@ namespace Cafe
             this.btnSiparisIptal.TabIndex = 42;
             this.btnSiparisIptal.Text = "SİPARİŞ İPTAL";
             this.btnSiparisIptal.UseVisualStyleBackColor = false;
+            this.btnSiparisIptal.Click += new System.EventHandler(this.btnSiparisIptal_Click);
             // 
             // label3
             // 
@@ -155,7 +165,7 @@ namespace Cafe
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(161, 15);
+            this.label2.Location = new System.Drawing.Point(270, 14);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 20);
@@ -199,7 +209,7 @@ namespace Cafe
             // nudAdet
             // 
             this.nudAdet.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.nudAdet.Location = new System.Drawing.Point(165, 41);
+            this.nudAdet.Location = new System.Drawing.Point(274, 40);
             this.nudAdet.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nudAdet.Maximum = new decimal(new int[] {
             999,
@@ -228,18 +238,65 @@ namespace Cafe
             this.cboUrun.Location = new System.Drawing.Point(38, 40);
             this.cboUrun.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cboUrun.Name = "cboUrun";
-            this.cboUrun.Size = new System.Drawing.Size(121, 28);
+            this.cboUrun.Size = new System.Drawing.Size(220, 28);
             this.cboUrun.TabIndex = 32;
             // 
             // dgvSiparisDetaylar
             // 
-            this.dgvSiparisDetaylar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dgvSiparisDetaylar.AllowUserToAddRows = false;
+            this.dgvSiparisDetaylar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvSiparisDetaylar.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvSiparisDetaylar.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvSiparisDetaylar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSiparisDetaylar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4});
             this.dgvSiparisDetaylar.Location = new System.Drawing.Point(37, 85);
             this.dgvSiparisDetaylar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dgvSiparisDetaylar.MultiSelect = false;
             this.dgvSiparisDetaylar.Name = "dgvSiparisDetaylar";
+            this.dgvSiparisDetaylar.ReadOnly = true;
+            this.dgvSiparisDetaylar.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSiparisDetaylar.Size = new System.Drawing.Size(495, 341);
             this.dgvSiparisDetaylar.TabIndex = 35;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "UrunAd";
+            this.Column1.HeaderText = "Ürün Adı";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "Adet";
+            this.Column2.HeaderText = "Ürün Adeti";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "BirimFiyat";
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Column3.HeaderText = "Birim Fiyatı";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "TutarTL";
+            dataGridViewCellStyle4.Format = "#,###.00TL";
+            dataGridViewCellStyle4.NullValue = null;
+            this.Column4.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Column4.HeaderText = "Tutar";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             // 
             // SiparisForm
             // 
@@ -289,5 +346,9 @@ namespace Cafe
         private System.Windows.Forms.NumericUpDown nudAdet;
         private System.Windows.Forms.ComboBox cboUrun;
         private System.Windows.Forms.DataGridView dgvSiparisDetaylar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
     }
 }
