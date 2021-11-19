@@ -1,15 +1,19 @@
 ﻿using ParaCafe.Data;
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Cafe
 {
     public partial class SiparisForm : Form
     {
+        public event EventHandler<MasaTasindiEventArgs> MasaTasindi;
+
         private readonly Siparis siparis;
         private readonly KafeVeri db;
         private readonly BindingList<SiparisDetay> blDetaylar;
+
         public SiparisForm(Siparis siparis, KafeVeri db)
         {
             this.siparis = siparis;
@@ -20,24 +24,29 @@ namespace Cafe
             dgvSiparisDetaylar.AutoGenerateColumns = false;
             dgvSiparisDetaylar.DataSource = blDetaylar;
             UrunleriListele();
-            MasaNoGuncelle();
-            OdemeTutariGuncelle();
+            MasaNoyuGuncelle();
+            OdemeTutariniGuncelle();
         }
 
         private void BlDetaylar_ListChanged(object sender, ListChangedEventArgs e)
         {
-            OdemeTutariGuncelle();
+            OdemeTutariniGuncelle();
         }
 
-        private void OdemeTutariGuncelle()
+        private void OdemeTutariniGuncelle()
         {
             lblOdemeTutari.Text = siparis.ToplamTutarTL;
         }
 
-        private void MasaNoGuncelle()
+        private void MasaNoyuGuncelle()
         {
-            Text = $"Masa {siparis.MasaNo}";
+            Text = $"Masa {siparis.MasaNo} (Açılışı : {siparis.AcilisZamani})";
             lblMasaNo.Text = siparis.MasaNo.ToString("00");
+            int[] doluMasalar = db.AktifSiparisler.Select(x => x.MasaNo).ToArray();
+            cboMasaNo.DataSource = Enumerable
+                .Range(1, db.MasaAdet)
+                .Where(x => !doluMasalar.Contains(x))
+                .ToList();
         }
 
         private void UrunleriListele()
@@ -47,11 +56,11 @@ namespace Cafe
 
         private void btnEkle_Click(object sender, EventArgs e)
         {
-            var sd = new SiparisDetay();
+            SiparisDetay sd = new SiparisDetay();
             Urun urun = (Urun)cboUrun.SelectedItem;
             sd.UrunAd = urun.UrunAd;
             sd.BirimFiyat = urun.BirimFiyat;
-            sd.Adet =(int)nudAdet.Value;
+            sd.Adet = (int)nudAdet.Value;
             blDetaylar.Add(sd);
         }
 
@@ -63,16 +72,13 @@ namespace Cafe
         private void btnSiparisIptal_Click(object sender, EventArgs e)
         {
             SiparisiKapat(SiparisDurum.Iptal, 0);
-            MessageBox.Show("Masa iptal edildi.");
         }
 
         private void btnOdemeAl_Click(object sender, EventArgs e)
         {
             SiparisiKapat(SiparisDurum.Odendi, siparis.ToplamTutar());
-            MessageBox.Show("Ödeme alındı.");
         }
 
-        
         private void SiparisiKapat(SiparisDurum durum, decimal odenenTutar)
         {
             siparis.KapanisZamani = DateTime.Now;
@@ -80,9 +86,19 @@ namespace Cafe
             siparis.OdenenTutar = odenenTutar;
             db.AktifSiparisler.Remove(siparis);
             db.GecmisSiparisler.Add(siparis);
-            
             Close();
-            
+        }
+
+        private void btnMasaTasi_Click(object sender, EventArgs e)
+        {
+            if (cboMasaNo.SelectedIndex == -1) return;
+
+            int eskiMasaNo = siparis.MasaNo;
+            int hedefMasaNo = (int)cboMasaNo.SelectedItem;
+            siparis.MasaNo = hedefMasaNo;
+            MasaNoyuGuncelle();
+            if (MasaTasindi != null)
+                MasaTasindi(this, new MasaTasindiEventArgs(eskiMasaNo, hedefMasaNo));
         }
     }
 }

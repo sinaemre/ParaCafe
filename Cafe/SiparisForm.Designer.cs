@@ -29,8 +29,8 @@ namespace Cafe
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblOdemeTutari = new System.Windows.Forms.Label();
             this.btnEkle = new System.Windows.Forms.Button();
             this.lblMasaNo = new System.Windows.Forms.Label();
@@ -194,6 +194,7 @@ namespace Cafe
             this.btnMasaTasi.TabIndex = 38;
             this.btnMasaTasi.Text = "TAŞI";
             this.btnMasaTasi.UseVisualStyleBackColor = true;
+            this.btnMasaTasi.Click += new System.EventHandler(this.btnMasaTasi_Click);
             // 
             // cboMasaNo
             // 
@@ -281,9 +282,9 @@ namespace Cafe
             // Column3
             // 
             this.Column3.DataPropertyName = "BirimFiyat";
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle5;
             this.Column3.HeaderText = "Birim Fiyatı";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
@@ -291,9 +292,9 @@ namespace Cafe
             // Column4
             // 
             this.Column4.DataPropertyName = "TutarTL";
-            dataGridViewCellStyle4.Format = "#,###.00TL";
-            dataGridViewCellStyle4.NullValue = null;
-            this.Column4.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle6.Format = "#,###.00TL";
+            dataGridViewCellStyle6.NullValue = null;
+            this.Column4.DefaultCellStyle = dataGridViewCellStyle6;
             this.Column4.HeaderText = "Tutar";
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
